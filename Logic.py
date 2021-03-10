@@ -5,6 +5,7 @@ class Field:
     size = width, height = 3, 3
     def __init__(self):
         # '9' - is empty cell
+        # second comment
         cells = [[9, 9, 9], [9, 9, 9], [9, 9, 9]]
 
 
