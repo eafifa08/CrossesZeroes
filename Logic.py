@@ -6,6 +6,7 @@ class Field:
     def __init__(self):
         # '9' - is empty cell
         # second comment
+        # toghe comment
         cells = [[9, 9, 9], [9, 9, 9], [9, 9, 9]]
 
 
