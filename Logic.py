@@ -54,6 +54,56 @@ class Field:
                 return 1
             else:
                 return 9
+        if (self.cells[0][0] == self.cells[1][0] == self.cells[2][0]):
+            if (self.cells[0][0] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[0][0] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        if (self.cells[0][1] == self.cells[1][1] == self.cells[2][1]):
+            if (self.cells[0][1] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[0][1] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        if (self.cells[0][2] == self.cells[1][2] == self.cells[2][2]):
+            if (self.cells[0][2] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[0][2] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        if (self.cells[0][0] == self.cells[1][1] == self.cells[2][2]):
+            if (self.cells[0][0] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[0][0] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        if (self.cells[2][0] == self.cells[1][1] == self.cells[0][2]):
+            if (self.cells[1][1] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[1][1] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        is_cells_is_full = False
+        for row in self.cells:
+            for elem in row:
+                if(elem == 9):
+                    print('test')
 
         return 9
 
