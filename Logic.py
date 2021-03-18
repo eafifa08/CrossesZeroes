@@ -8,9 +8,12 @@ class Player:
 
     def go(self, field, x, y):
         try:
-            if(field.cells[x][y] == 9):
-                print('Empty cell')
+            if(field.cells[x][y] == '*'):
+                print('Symbol ', self.symbol, ' is write to ', x, y)
+                field.cells[x][y] = self.symbol
                 return 1
+            else:
+                print('Cell is not empty')
         except IndexError:
             print('bad index')
             return 0
@@ -20,12 +23,39 @@ class Field:
     size = width, height = 3, 3
     def __init__(self):
         # '9' - is empty cell
-        self.cells = [[9, 9, 9], [9, 9, 9], [9, 9, 9]]
+        self.cells = [['*', '*', '*'], ['*', '*', '*'], ['*', '*', '*']]
         print('Field is created')
 
-    def check_the_end(self):
-        return False
+    def check_the_winner(self):
+        if(self.cells[0][0] == self.cells[0][1] == self.cells[0][2] ):
+            if(self.cells[0][0] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif(self.cells[0][0] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        if (self.cells[1][0] == self.cells[1][1] == self.cells[1][2]):
+            if (self.cells[1][0] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[1][0] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
+        if (self.cells[2][0] == self.cells[2][1] == self.cells[2][2]):
+            if (self.cells[2][0] == 0):
+                print('Player with symbol 0 win')
+                return 0
+            elif (self.cells[0][0] == 1):
+                print('Player with symbol 1 win')
+                return 1
+            else:
+                return 9
 
+        return 9
 
 
 class GameProcess:
