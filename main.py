@@ -1,4 +1,17 @@
 import Logic
+import pygame
+import sys
+
+pygame.init()
+
+screen = pygame.display.set_mode((400, 500))
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
 player_A = Logic.Player(0)
 print('created', player_A.name, 'with symbol ', player_A.symbol)
 player_B = Logic.Player(1)

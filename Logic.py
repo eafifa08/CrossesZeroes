@@ -49,7 +49,7 @@ class Field:
             if (self.cells[2][0] == 0):
                 print('Player with symbol 0 win')
                 return 0
-            elif (self.cells[0][0] == 1):
+            elif (self.cells[2][0] == 1):
                 print('Player with symbol 1 win')
                 return 1
             else:
