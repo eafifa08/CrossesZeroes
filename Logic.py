@@ -14,6 +14,7 @@ class Player:
                 return 1
             else:
                 print('Cell is not empty')
+                return 0
         except IndexError:
             print('bad index')
             return 0
