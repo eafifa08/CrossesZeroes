@@ -100,11 +100,14 @@ class Field:
                 return 1
             else:
                 return 9
-        is_cells_is_full = False
+        is_field_full = True
         for row in self.cells:
             for elem in row:
-                if(elem == 9):
-                    print('test')
+                if(elem == '*'):
+                    is_field_full = False
+        if is_field_full:
+            print('Friendship win')
+            return 100
 
         return 9
 

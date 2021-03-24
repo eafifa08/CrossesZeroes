@@ -2,6 +2,16 @@ import Logic
 import pygame
 import sys
 
+def who_is_winner(x):
+    if x == 0:
+        return 'Player A'
+    elif x == 1:
+        return 'Player B'
+    elif x == 100:
+        return 'Friendship'
+    else:
+        return 'whoiswinner_error'
+
 player_A = Logic.Player(0)
 print('created', player_A.name, 'with symbol ', player_A.symbol)
 player_B = Logic.Player(1)
@@ -19,7 +29,7 @@ line = pygame.draw.line(screen, color_red, [105, 5], [105, 305])
 line = pygame.draw.line(screen, color_red, [205, 5], [205, 305])
 line = pygame.draw.line(screen, color_red, [5, 105], [305, 105])
 line = pygame.draw.line(screen, color_red, [5, 205], [305, 205])
-font = pygame.font.SysFont('couriernew', 30)
+font = pygame.font.SysFont('couriernew', 20)
 text_0 = font.render(str('0'), True, pygame.color.THECOLORS['green'])
 text_x = font.render(str('x'), True, pygame.color.THECOLORS['blue'])
 #screen.blit(text, (50, 50))
@@ -55,3 +65,18 @@ while(is_the_end == 9):
                     screen.blit(text_x, (
                     int((mouse_position[0] - 5) // 100) * 100 + 50, int((mouse_position[1] - 5) // 100) * 100 + 50))
         pygame.display.flip()
+pygame.display.flip()
+screen.fill(pygame.color.THECOLORS['green'], (0, 0, 310, 310), 0)
+who_is_winner ='Winner is ' + str(who_is_winner(is_the_end))
+text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['blue'])
+screen.blit(text_winner, (5, 5))
+pygame.display.flip()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+
+
