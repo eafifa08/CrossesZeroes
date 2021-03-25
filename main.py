@@ -32,7 +32,6 @@ line = pygame.draw.line(screen, color_red, [5, 205], [305, 205])
 font = pygame.font.SysFont('couriernew', 20)
 text_0 = font.render(str('0'), True, pygame.color.THECOLORS['green'])
 text_x = font.render(str('x'), True, pygame.color.THECOLORS['blue'])
-#screen.blit(text, (50, 50))
 
 pygame.display.flip()
 # is_the_end=9 - Победителя нет, есть свободные клетки
@@ -53,24 +52,43 @@ while(is_the_end == 9):
                 #pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
                 print('Player_A go to ', int((mouse_position[0]-5)//100), int((mouse_position[1]-5)//100))
                 if(player_A.go(field, int((mouse_position[0]-5)//100), int((mouse_position[1]-5)//100)) == 1):
-                    is_the_end = field.check_the_winner()
+                    is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
                     screen.blit(text_0, (int((mouse_position[0]-5)//100)*100+50, int((mouse_position[1]-5)//100)*100+50))
             else:
                 #pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
                 print('Player_B go to ', int((mouse_position[0] - 5) // 100), int((mouse_position[1] - 5) // 100))
                 if(player_B.go(field, int((mouse_position[0] - 5) // 100), int((mouse_position[1] - 5) // 100)) == 1):
-                    is_the_end = field.check_the_winner()
+                    is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
                     screen.blit(text_x, (
                     int((mouse_position[0] - 5) // 100) * 100 + 50, int((mouse_position[1] - 5) // 100) * 100 + 50))
         pygame.display.flip()
 pygame.display.flip()
+
+if is_the_end != 100:
+    line_to_draw_winner = [[field.check_the_winner()[1][0]*100+50, field.check_the_winner()[1][1]*100+50],
+                           [field.check_the_winner()[2][0]*100+50, field.check_the_winner()[2][1]*100+50],
+                           [field.check_the_winner()[3][0]*100+50, field.check_the_winner()[3][1]*100+50]]
+    pygame.draw.lines(screen, pygame.color.THECOLORS['orange'], False, line_to_draw_winner)
+    pygame.display.flip()
+nextStep = False
+while not nextStep:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            nextStep = True
+
 screen.fill(pygame.color.THECOLORS['green'], (0, 0, 310, 310), 0)
 who_is_winner ='Winner is ' + str(who_is_winner(is_the_end))
 text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['blue'])
 screen.blit(text_winner, (5, 5))
 pygame.display.flip()
+
+
+
 
 while True:
     for event in pygame.event.get():

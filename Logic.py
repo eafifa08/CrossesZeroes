@@ -31,75 +31,75 @@ class Field:
         if(self.cells[0][0] == self.cells[0][1] == self.cells[0][2] ):
             if(self.cells[0][0] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [0, 0], [0, 1], [0, 2]]
             elif(self.cells[0][0] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [0, 0], [0, 1], [0, 2]]
             else:
-                return 9
+                return [9]
         if (self.cells[1][0] == self.cells[1][1] == self.cells[1][2]):
             if (self.cells[1][0] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [1, 0], [1, 1], [1, 2]]
             elif (self.cells[1][0] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [1, 0], [1, 1], [1, 2]]
             else:
-                return 9
+                return [9]
         if (self.cells[2][0] == self.cells[2][1] == self.cells[2][2]):
             if (self.cells[2][0] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [2, 0], [2, 1], [2, 2]]
             elif (self.cells[2][0] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [2, 0], [2, 1], [2, 2]]
             else:
-                return 9
+                return [9]
         if (self.cells[0][0] == self.cells[1][0] == self.cells[2][0]):
             if (self.cells[0][0] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [0, 0], [1, 0], [2, 0]]
             elif (self.cells[0][0] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [0, 0], [1, 0], [2, 0]]
             else:
-                return 9
+                return [9]
         if (self.cells[0][1] == self.cells[1][1] == self.cells[2][1]):
             if (self.cells[0][1] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [0, 1], [1, 1], [2, 1]]
             elif (self.cells[0][1] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [0, 1], [1, 1], [2, 1]]
             else:
-                return 9
+                return [9]
         if (self.cells[0][2] == self.cells[1][2] == self.cells[2][2]):
             if (self.cells[0][2] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [0, 2], [1, 2], [2, 2]]
             elif (self.cells[0][2] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [0, 2], [1, 2], [2, 2]]
             else:
-                return 9
+                return [9]
         if (self.cells[0][0] == self.cells[1][1] == self.cells[2][2]):
             if (self.cells[0][0] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [0, 0], [1, 1], [2, 2]]
             elif (self.cells[0][0] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [0, 0], [1, 1], [2, 2]]
             else:
-                return 9
+                return [9]
         if (self.cells[2][0] == self.cells[1][1] == self.cells[0][2]):
             if (self.cells[1][1] == 0):
                 print('Player with symbol 0 win')
-                return 0
+                return [0, [2, 0], [1, 1], [0, 2]]
             elif (self.cells[1][1] == 1):
                 print('Player with symbol 1 win')
-                return 1
+                return [1, [2, 0], [1, 1], [0, 2]]
             else:
-                return 9
+                return [9]
         is_field_full = True
         for row in self.cells:
             for elem in row:
@@ -107,9 +107,9 @@ class Field:
                     is_field_full = False
         if is_field_full:
             print('Friendship win')
-            return 100
+            return [100]
 
-        return 9
+        return [9]
 
 
 class GameProcess:
