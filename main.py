@@ -25,9 +25,12 @@ color_red = (250, 0, 0)
 
 screen = pygame.display.set_mode((300, 300))
 image_field = pygame.image.load('crosses_nulls_field.jpg')
-image_rect = image_field.get_rect()
+image_x = pygame.image.load('letterX.png').convert_alpha()
+image_field_rect = image_field.get_rect()
+image_x_rect = image_x.get_rect()
 screen.fill(pygame.color.THECOLORS['black'])
-screen.blit(image_field, image_rect)
+screen.blit(image_field, image_field_rect)
+
 
 #screen = pygame.display.set_mode((310, 310))
 #r = pygame.Rect(5, 5, 300, 300)
@@ -68,8 +71,11 @@ while(is_the_end == 9):
                 if(player_B.go(field, int((mouse_position[0]) // 100), int((mouse_position[1]) // 100)) == 1):
                     is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
-                    screen.blit(text_x, (
-                    int((mouse_position[0]) // 100) * 100 + 50, int((mouse_position[1]) // 100) * 100 + 50))
+                    #screen.blit(text_x, (int((mouse_position[0]) // 100) * 100 + 50, int((mouse_position[1]) // 100) * 100 + 50))
+                    rect = pygame.Rect(int((mouse_position[0]) // 100) * 100 + 5, int((mouse_position[1]) // 100) * 100 + 5,
+                                                                    85, 85)
+                    screen.blit(image_x, pygame.Rect(int((mouse_position[0]) // 100) * 100 + 5, int((mouse_position[1]) // 100) * 100 + 5,
+                                                                    85, 85))
         pygame.display.flip()
 pygame.display.flip()
 
