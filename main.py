@@ -2,6 +2,8 @@ import Logic
 import pygame
 import sys
 
+FPS = 60
+
 def who_is_winner(x):
     if x == 0:
         return 'Player A'
@@ -18,7 +20,9 @@ player_B = Logic.Player(1)
 print('created', player_B.name, 'with symbol ', player_B.symbol)
 field = Logic.Field()
 
+
 pygame.init()
+clock = pygame.time.Clock()
 pygame.display.set_caption('Crosses & NuLLs')
 color_grey = (100, 100, 100)
 color_red = (250, 0, 0)
@@ -31,19 +35,11 @@ image_field_rect = image_field.get_rect()
 screen.fill(pygame.color.THECOLORS['black'])
 screen.blit(image_field, image_field_rect)
 
-
-#screen = pygame.display.set_mode((310, 310))
-#r = pygame.Rect(5, 5, 300, 300)
-#pygame.draw.rect(screen, color_grey, r, 0)
-#line = pygame.draw.line(screen, color_red, [105, 5], [105, 305])
-#line = pygame.draw.line(screen, color_red, [205, 5], [205, 305])
-#line = pygame.draw.line(screen, color_red, [5, 105], [305, 105])
-#line = pygame.draw.line(screen, color_red, [5, 205], [305, 205])
 font = pygame.font.SysFont('couriernew', 20)
 text_0 = font.render(str('0'), True, pygame.color.THECOLORS['green'])
 text_x = font.render(str('x'), True, pygame.color.THECOLORS['blue'])
 
-pygame.display.flip()
+pygame.display.update()
 # is_the_end=9 - Победителя нет, есть свободные клетки
 # is_the_end=0 - Победитель с символом 0
 # is_the_end=1 - Победитель с символом 1
@@ -51,6 +47,7 @@ pygame.display.flip()
 is_the_end = 9
 who_is_go = 0
 while(is_the_end == 9):
+    clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -97,13 +94,11 @@ while not nextStep:
         if event.type == pygame.MOUSEBUTTONDOWN:
             nextStep = True
 
-screen.fill(pygame.color.THECOLORS['green'], (0, 0, 300, 300), 0)
+screen.fill(pygame.color.THECOLORS['black'], (0, 0, 300, 300), 0)
 who_is_winner ='Winner is ' + str(who_is_winner(is_the_end))
-text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['blue'])
+text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['white'])
 screen.blit(text_winner, (5, 5))
 pygame.display.flip()
-
-
 
 
 while True:
@@ -111,6 +106,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
 
 
 

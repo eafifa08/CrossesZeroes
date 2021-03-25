@@ -7,6 +7,13 @@ class Player:
         self.symbol = symbol
 
     def go(self, field, x, y):
+        """
+        Игрок делает ход на поле по координатам x,y
+        :param field: поле
+        :param x: абцисса
+        :param y: ордината
+        :return: 1 - ход записан, 0 - ход не записан
+        """
         try:
             if(field.cells[x][y] == '*'):
                 print('Symbol ', self.symbol, ' is write to ', x, y)
