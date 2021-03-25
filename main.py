@@ -22,13 +22,20 @@ pygame.init()
 pygame.display.set_caption('Crosses & NuLLs')
 color_grey = (100, 100, 100)
 color_red = (250, 0, 0)
-screen = pygame.display.set_mode((310, 310))
-r = pygame.Rect(5, 5, 300, 300)
-pygame.draw.rect(screen, color_grey, r, 0)
-line = pygame.draw.line(screen, color_red, [105, 5], [105, 305])
-line = pygame.draw.line(screen, color_red, [205, 5], [205, 305])
-line = pygame.draw.line(screen, color_red, [5, 105], [305, 105])
-line = pygame.draw.line(screen, color_red, [5, 205], [305, 205])
+
+screen = pygame.display.set_mode((300, 300))
+image_field = pygame.image.load('crosses_nulls_field.jpg')
+image_rect = image_field.get_rect()
+screen.fill(pygame.color.THECOLORS['black'])
+screen.blit(image_field, image_rect)
+
+#screen = pygame.display.set_mode((310, 310))
+#r = pygame.Rect(5, 5, 300, 300)
+#pygame.draw.rect(screen, color_grey, r, 0)
+#line = pygame.draw.line(screen, color_red, [105, 5], [105, 305])
+#line = pygame.draw.line(screen, color_red, [205, 5], [205, 305])
+#line = pygame.draw.line(screen, color_red, [5, 105], [305, 105])
+#line = pygame.draw.line(screen, color_red, [5, 205], [305, 205])
 font = pygame.font.SysFont('couriernew', 20)
 text_0 = font.render(str('0'), True, pygame.color.THECOLORS['green'])
 text_x = font.render(str('x'), True, pygame.color.THECOLORS['blue'])
@@ -50,19 +57,19 @@ while(is_the_end == 9):
             print('pressed', mouse_position)
             if(who_is_go % 2 == 0):
                 #pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
-                print('Player_A go to ', int((mouse_position[0]-5)//100), int((mouse_position[1]-5)//100))
-                if(player_A.go(field, int((mouse_position[0]-5)//100), int((mouse_position[1]-5)//100)) == 1):
+                print('Player_A go to ', int((mouse_position[0])//100), int((mouse_position[1])//100))
+                if(player_A.go(field, int((mouse_position[0])//100), int((mouse_position[1])//100)) == 1):
                     is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
-                    screen.blit(text_0, (int((mouse_position[0]-5)//100)*100+50, int((mouse_position[1]-5)//100)*100+50))
+                    screen.blit(text_0, (int((mouse_position[0])//100)*100+50, int((mouse_position[1])//100)*100+50))
             else:
                 #pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
-                print('Player_B go to ', int((mouse_position[0] - 5) // 100), int((mouse_position[1] - 5) // 100))
-                if(player_B.go(field, int((mouse_position[0] - 5) // 100), int((mouse_position[1] - 5) // 100)) == 1):
+                print('Player_B go to ', int((mouse_position[0]) // 100), int((mouse_position[1]) // 100))
+                if(player_B.go(field, int((mouse_position[0]) // 100), int((mouse_position[1]) // 100)) == 1):
                     is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
                     screen.blit(text_x, (
-                    int((mouse_position[0] - 5) // 100) * 100 + 50, int((mouse_position[1] - 5) // 100) * 100 + 50))
+                    int((mouse_position[0]) // 100) * 100 + 50, int((mouse_position[1]) // 100) * 100 + 50))
         pygame.display.flip()
 pygame.display.flip()
 
@@ -81,7 +88,7 @@ while not nextStep:
         if event.type == pygame.MOUSEBUTTONDOWN:
             nextStep = True
 
-screen.fill(pygame.color.THECOLORS['green'], (0, 0, 310, 310), 0)
+screen.fill(pygame.color.THECOLORS['green'], (0, 0, 300, 300), 0)
 who_is_winner ='Winner is ' + str(who_is_winner(is_the_end))
 text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['blue'])
 screen.blit(text_winner, (5, 5))
