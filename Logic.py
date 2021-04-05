@@ -1,10 +1,10 @@
-import random
-
 
 class Player:
-    def __init__(self, symbol):
-        self.name = 'Player' + str(random.randint(1, 100))
+    def __init__(self, name, symbol, age):
+        self.name = name
         self.symbol = symbol
+        self.age = age
+        self.result = None
 
     def go(self, field, x, y):
         """

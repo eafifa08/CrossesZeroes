@@ -1,22 +1,31 @@
 import Logic
+import Database
 import pygame
 import sys
 
 FPS = 60
+PATH_TO_DATABASE = "crosses_zeroes_database.sqlite"
 
 def who_is_winner(x):
     if x == 0:
+        player_A.result = 1
+        player_B.result = 0
         return 'Player A'
     elif x == 1:
+        player_A.result = 0
+        player_B.result = 1
         return 'Player B'
     elif x == 100:
+        player_A.result = 100
+        player_B.result = 100
         return 'Friendship'
     else:
         return 'whoiswinner_error'
 
-player_A = Logic.Player(0)
+connection_to_sqlite = Database.create_connection(PATH_TO_DATABASE)
+player_A = Logic.Player('Player_A',  0, 18)
 print('created', player_A.name, 'with symbol ', player_A.symbol)
-player_B = Logic.Player(1)
+player_B = Logic.Player('Player_B', 1, 75)
 print('created', player_B.name, 'with symbol ', player_B.symbol)
 field = Logic.Field()
 
@@ -96,6 +105,8 @@ while not nextStep:
 
 screen.fill(pygame.color.THECOLORS['black'], (0, 0, 300, 300), 0)
 who_is_winner ='Winner is ' + str(who_is_winner(is_the_end))
+
+Database.write_round_stat(connection_to_sqlite,[player_A.name,player_B.name],[player_A.age,player_B.age],[player_A.result,player_B.result])
 text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['white'])
 screen.blit(text_winner, (5, 5))
 pygame.display.flip()
