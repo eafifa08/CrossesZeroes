@@ -22,18 +22,16 @@ def who_is_winner(x):
     else:
         return 'whoiswinner_error'
 
-connection_to_sqlite = Database.create_connection(PATH_TO_DATABASE)
+
 player_A = Logic.Player('Player_A',  0, 18)
 print('created', player_A.name, 'with symbol ', player_A.symbol)
 player_B = Logic.Player('Player_B', 1, 75)
 print('created', player_B.name, 'with symbol ', player_B.symbol)
 field = Logic.Field()
 
-
 pygame.init()
 clock = pygame.time.Clock()
 pygame.display.set_caption('Crosses & NuLLs')
-color_grey = (100, 100, 100)
 color_red = (250, 0, 0)
 
 screen = pygame.display.set_mode((300, 300))
@@ -65,22 +63,20 @@ while(is_the_end == 9):
             mouse_position = pygame.mouse.get_pos()
             print('pressed', mouse_position)
             if(who_is_go % 2 == 0):
-                #pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
+                pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
                 print('Player_A go to ', int((mouse_position[0])//100), int((mouse_position[1])//100))
                 if(player_A.go(field, int((mouse_position[0])//100), int((mouse_position[1])//100)) == 1):
                     is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
-                    #screen.blit(text_0, (int((mouse_position[0])//100)*100+50, int((mouse_position[1])//100)*100+50))
                     screen.blit(image_o, pygame.Rect(int((mouse_position[0]) // 100) * 100 + 5,
                                                      int((mouse_position[1]) // 100) * 100 + 5,
                                                      85, 85))
             else:
-                #pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
+                pygame.draw.circle(screen, color_red, mouse_position, 2, 2)
                 print('Player_B go to ', int((mouse_position[0]) // 100), int((mouse_position[1]) // 100))
                 if(player_B.go(field, int((mouse_position[0]) // 100), int((mouse_position[1]) // 100)) == 1):
                     is_the_end = field.check_the_winner()[0]
                     who_is_go += 1
-                    #screen.blit(text_x, (int((mouse_position[0]) // 100) * 100 + 50, int((mouse_position[1]) // 100) * 100 + 50))
                     rect = pygame.Rect(int((mouse_position[0]) // 100) * 100 + 5, int((mouse_position[1]) // 100) * 100 + 5,
                                                                     85, 85)
                     screen.blit(image_x, pygame.Rect(int((mouse_position[0]) // 100) * 100 + 5, int((mouse_position[1]) // 100) * 100 + 5,
@@ -105,19 +101,15 @@ while not nextStep:
 
 screen.fill(pygame.color.THECOLORS['black'], (0, 0, 300, 300), 0)
 who_is_winner ='Winner is ' + str(who_is_winner(is_the_end))
-
-Database.write_round_stat(connection_to_sqlite,[player_A.name,player_B.name],[player_A.age,player_B.age],[player_A.result,player_B.result])
 text_winner = font.render(who_is_winner, True, pygame.color.THECOLORS['white'])
 screen.blit(text_winner, (5, 5))
 pygame.display.flip()
 
+connection_to_sqlite = Database.create_connection(PATH_TO_DATABASE)
+Database.write_round_stat(connection_to_sqlite,[player_A.name,player_B.name],[player_A.age,player_B.age],[player_A.result,player_B.result])
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
-
-
-
