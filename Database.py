@@ -11,10 +11,12 @@ def create_connection(path):
 
     return connection
 
-def execute_query(connection, query):
+
+def execute_query(connection, query, user_victories, user_fails, user_win_friendly, name, age):
     cursor = connection.cursor()
     try:
-        cursor.execute(query)
+
+        cursor.execute(query, (user_victories, user_fails, user_win_friendly, name, age))
         connection.commit()
         print("Query executed successfully")
     except sqlite3.Error as e:
@@ -39,9 +41,10 @@ def read_user_stat(conn, name, age):
         name LIKE "{name}" AND age = {age}
     """
     user_stats = execute_read_query(conn, query)
+    return user_stats[0]
 
     #return user_stats(0)
-    return [0, 0, 0]
+    #return [0, 0, 0]
 
 def write_round_stat(connection, usernames, ages, results):
     user1, user2 = usernames
@@ -59,11 +62,11 @@ def write_round_stat(connection, usernames, ages, results):
         user1_victories += 1
         user2_fails += 1
     query = f"""
-            INSERT INTO
-                users(name, age, victories, fails, win_friendly)
-            VALUES
-                ("{user1}", {age1}, {user1_victories}, {user1_fails}, {user1_win_friendly}),
-                ("{user2}", {age2}, {user2_victories}, {user2_fails}, {user2_win_friendly});
+            UPDATE
+                users
+            SET victories=?, fails=?, win_friendly=?
+            WHERE name=? AND age=?;
             """
-    execute_query(connection, query)
+    execute_query(connection, query, user1_victories, user1_fails, user1_win_friendly, user1, age1)
+    execute_query(connection, query, user2_victories, user2_fails, user2_win_friendly, user2, age2)
     test1=1
